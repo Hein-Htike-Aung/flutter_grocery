@@ -1,0 +1,32 @@
+### CREATE PRODUCT (TEST WITH POSTMAN)
+POST htp://localhost:4000/api/product
+Content-Type: application/json
+
+{
+    "productName": "",
+    "": "",
+    "": "file"
+}
+
+### UPDATE PRODUCT (TEST WITH POSTMAN)
+PATCH http://localhost:4000/api/product/630aedb571886bec84bbbbe5
+Content-Type: application/json
+
+{
+    "categoryName": "",
+    "categoryDescription": "",
+    "categoryImage": "file"
+}
+
+### GET ALL PRODUCTS
+GET http://localhost:4000/api/product
+
+
+### GET ALL PRODUCTS (BY QUERY)
+GET http://0.0.0.0:4000/api/product?productName=product%201&page=1&pageSize=10
+
+### GET PRODUCT BY ID
+GET http://localhost:4000/api/product/630b6adef031d339ce325aa1
+
+### DELETE PRODUCT
+DELETE http://localhost:4000/api/product/630b6c8af031d339ce325aab
