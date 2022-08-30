@@ -25,6 +25,7 @@ const category = mongoose.model(
           delete ret.__v;
         },
       },
+      timestamps: true,
     }
   )
 );

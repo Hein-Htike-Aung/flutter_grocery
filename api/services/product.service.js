@@ -48,7 +48,7 @@ const getProducts = async (params, callback) => {
   product
     .find(condition)
     .sort(params.sort)
-    .populate("category", ["cateogryName", "categoryImage"]) // will fetch category object
+    .populate("category") // will fetch category object
     .limit(perPage)
     .skip(perPage * page)
     .then((resp) => callback(null, resp))

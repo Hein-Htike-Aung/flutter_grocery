@@ -22,7 +22,7 @@ const product = mongoose.model(
         required: false,
       },
       productSKU: {
-        type: Number,
+        type: String,
         required: true,
       },
       productPrice: {
@@ -55,6 +55,7 @@ const product = mongoose.model(
           delete ret.__v;
         },
       },
+      timestamps: true,
     }
   )
 );

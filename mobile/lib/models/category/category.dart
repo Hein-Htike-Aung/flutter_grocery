@@ -12,12 +12,18 @@ List<Category> categoriesFromJson(dynamic str) => List<Category>.from(
       ),
     );
 
+/* 
+  freezed focus on the definition of model.
+  - define a constructor + the properties
+  - override toString, operator ==, hashCode
+  - implement a copyWith method to clone the object
+  - handling de/serialization
+*/
 @freezed
 abstract class Category with _$Category {
   // with mixin
-  factory Category(
-      // factory constructor
-      {
+  // factory constructor
+  factory Category({
     required String categoryName,
     required String categoryImage,
     required String categoryId,
@@ -27,7 +33,7 @@ abstract class Category with _$Category {
       _$CategoryFromJson(json);
 }
 
-// get full image path of th Category
+// get full image path of the Category
 extension CategoryExt on Category {
   String get fullImagePath => Config.imageURL + categoryImage;
 }

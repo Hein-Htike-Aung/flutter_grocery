@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile/models/product/product_filter.dart';
 
 import '../models/category/category.dart';
 import '../models/pagination/pagination.dart';
 import '../pages/products_page.dart';
-import '../providers/category_provider.dart';
-
+import '../providers/providers.dart';
 
 class HomeCategoriesWidget extends ConsumerWidget {
   const HomeCategoriesWidget({super.key});
@@ -37,13 +37,13 @@ class HomeCategoriesWidget extends ConsumerWidget {
     );
 
     return categories.when(
-      data: (list) => _buildCategoryList(list!),
+      data: (list) => _buildCategoryList(list!, ref),
       error: (_, __) => const Center(child: Text("ERROR")),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
 
-  Widget _buildCategoryList(List<Category> categories) {
+  Widget _buildCategoryList(List<Category> categories, WidgetRef ref) {
     return Container(
       height: 100,
       alignment: Alignment.centerLeft,
@@ -56,6 +56,17 @@ class HomeCategoriesWidget extends ConsumerWidget {
           var data = categories[index];
           return GestureDetector(
             onTap: () {
+              ProductFilterModel filterModel = ProductFilterModel(
+                paginationModel: PaginationModel(page: 1, pageSize: 10),
+                categoryId: data.categoryId,
+              );
+
+              ref
+                  .read(productsFilterProvider.notifier)
+                  .seteProductFilter(filterModel);
+
+              ref.read(productsNotifierProvider.notifier).getProducts();
+
               /// Navigate & Passing data
               Navigator.of(context).pushNamed(
                 ProductsPage.routeName,
